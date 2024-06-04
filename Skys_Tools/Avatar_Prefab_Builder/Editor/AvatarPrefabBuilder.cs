@@ -12,7 +12,7 @@ public class AvatarPrefabBuilder : EditorWindow
 {
     public GameObject Avatar, AvatarClone;
     UnityEngine.Object ExpressionsMenu, ExpressionParms;
-    string NewPrefabName;
+    string NewPrefabName  = "";
     string LayerName;
 
     [MenuItem("Tools/Sky's Tools/Avatar Prefab Builder")]
