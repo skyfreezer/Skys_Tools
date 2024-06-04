@@ -144,9 +144,11 @@ public class AvatarPrefabBuilder : EditorWindow
         var Parms = avatarDescriptor.expressionParameters;
 
         AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(Menu), "Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Expressions/" + NewPrefabName + "_Menu.asset");
+        var NewMenu = AssetDatabase.LoadAssetAtPath("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Expressions/" + NewPrefabName + "_Menu.asset", typeof(VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu)) as VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu;
+        avatarDescriptor2.expressionsMenu = NewMenu;
         AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(Parms), "Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Expressions/" + NewPrefabName + "_Parms.asset");
-        avatarDescriptor2.expressionsMenu = Menu;
-        avatarDescriptor2.expressionParameters = Parms;
+        var NewParms = AssetDatabase.LoadAssetAtPath("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Expressions/" + NewPrefabName + "_Parms.asset", typeof(VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters)) as VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters;
+        avatarDescriptor2.expressionParameters = NewParms;
     
         //Once the copy is completed hide old prefab
         if (Avatar.activeSelf)
