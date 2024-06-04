@@ -1,27 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Animations;
-using UnityEditor.Presets;
-using Unity.Collections;
-using Unity.VisualScripting;
-using UnityEditor.VersionControl;
-using VRC.SDK3.Avatars.ScriptableObjects;
-using System;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
-
-
-
-
-
-
 
 #if VRC_SDK_VRCSDK3
 using VRC.SDK3.Avatars.Components;
-using VRC.SDKBase;
 #endif
 
 
@@ -29,12 +12,8 @@ public class AvatarPrefabBuilder : EditorWindow
 {
     public GameObject Avatar, AvatarClone;
     UnityEngine.Object ExpressionsMenu, ExpressionParms;
-    AnimatorController FX_Layer, Base_Layer, Gesture_Layer, Action_Layer;
-    bool CustomLayers, CustomExpressions;
     string NewPrefabName;
-    string RootLocation= "Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/";
     string LayerName;
-    string btnYes, btnNo;
 
     [MenuItem("Tools/Sky's Tools/Avatar Prefab Builder")]
     public static void ShowWindow()
