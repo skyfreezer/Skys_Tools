@@ -80,11 +80,20 @@ public class AvatarPrefabBuilder : EditorWindow
     private void CreateNewPrefab()
     {
         BuildAssetFolders();
+        //Check to see if the folder does not exist to prevent duplicate blank folders
+        if (!Directory.Exists("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName))
+        {
+            AssetDatabase.CreateFolder("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars", NewPrefabName);
+            AssetDatabase.CreateFolder("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName, "Animations");
+            AssetDatabase.CreateFolder("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName, "Expressions");
+        }
 
-        AssetDatabase.CreateFolder("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars", NewPrefabName);
-        AssetDatabase.CreateFolder("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName, "Animations");
-        AssetDatabase.CreateFolder("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName, "Expressions");
-
+          //Make sure the GameObject for the copy from Prefab is active
+          if (!Avatar.activeSelf)
+          {
+              Avatar.SetActive(true);
+          }
+        
         //Clone Prefab and rename based on users input field
         Instantiate(Avatar, new Vector3(0, 0, 0), Quaternion.identity);
         AvatarClone = GameObject.Find(Avatar.name + "(Clone)");
@@ -138,6 +147,14 @@ public class AvatarPrefabBuilder : EditorWindow
         AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(Parms), "Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Expressions/" + NewPrefabName + "_Parms.asset");
         avatarDescriptor2.expressionsMenu = Menu;
         avatarDescriptor2.expressionParameters = Parms;
+    
+        //Once the copy is completed hide old prefab
+        if (Avatar.activeSelf)
+        {
+            Avatar.SetActive(false);
+        }
+    
+    
     }
    
         
