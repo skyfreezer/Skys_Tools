@@ -1,4 +1,4 @@
-# Sky Tools
+# Skys Tools
 A set of tools to help with editing avatars for VRChat
 
 ## How to Install
