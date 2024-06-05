@@ -2,7 +2,7 @@
 A set of tools to help with editing avatars for VRChat
 
 ## How to Install
-You can install from the latest unity package located [HERE](https://github.com/skyfreezer/Skys_Tools/releases/)<br>
+You can install one of the following tools from the latest unity packages located [HERE](https://github.com/skyfreezer/Skys_Tools/releases/)<br>
 
 
 
