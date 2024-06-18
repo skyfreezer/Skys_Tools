@@ -13,9 +13,10 @@ public class AvatarPrefabBuilder : EditorWindow
     public GameObject Avatar, AvatarClone;
     UnityEngine.Object ExpressionsMenu, ExpressionParms;
     string NewPrefabName  = "";
+    string LayerName, SpecialLayerName;
     string LayerName;
 
-    [MenuItem("Tools/Sky's Tools/Avatar Prefab Builder")]
+    [MenuItem("Sky's Tools/Avatar Prefab Builder")]
     public static void ShowWindow()
     {
         GetWindow(typeof(AvatarPrefabBuilder), false, "Avatar Prefab Builder", true);   
@@ -149,9 +150,43 @@ public class AvatarPrefabBuilder : EditorWindow
         AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(Parms), "Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Expressions/" + NewPrefabName + "_Parms.asset");
         var NewParms = AssetDatabase.LoadAssetAtPath("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Expressions/" + NewPrefabName + "_Parms.asset", typeof(VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters)) as VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters;
         avatarDescriptor2.expressionParameters = NewParms;
-    
-        //Once the copy is completed hide old prefab
-        if (Avatar.activeSelf)
+
+
+        //Make copies of the Special Player Layers
+
+        var SpecialLayers = avatarDescriptor.specialAnimationLayers;
+
+        int count2 = 0;
+
+        foreach (var Special in SpecialLayers)
+        {
+            if (Special.isDefault == false)
+            {
+                switch (count2)
+                {
+                    case 0:
+                        SpecialLayerName = "Sitting";
+                        break;
+                    case 1:
+                        SpecialLayerName = "TPose";
+                        break;
+                    case 2:
+                        SpecialLayerName = "IKPose";
+                        break;
+                }
+
+                AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(Special.animatorController), "Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Animations/" + NewPrefabName + "_" + SpecialLayerName + ".controller");
+
+                var SpecialLayerCopy = AssetDatabase.LoadAssetAtPath("Assets/Skys_Tools/Avatar_Prefab_Builder/Avatars/" + NewPrefabName + "/Animations/" + NewPrefabName + "_" + SpecialLayerName + ".controller", typeof(AnimatorController)) as AnimatorController;
+                avatarDescriptor2.specialAnimationLayers[count2].animatorController = SpecialLayerCopy;
+
+            }
+
+
+
+
+            //Once the copy is completed hide old prefab
+            if (Avatar.activeSelf)
         {
             Avatar.SetActive(false);
         }
