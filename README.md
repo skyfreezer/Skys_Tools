@@ -1,6 +1,9 @@
 # Skys Tools
 A set of tools to help with editing avatars for VRChat
 
+## Prerequisites
+VRChat Avatars SDK (VCC Package) or VRChat Creator Companion
+
 ## How to Install
 You can install one of the following tools from the latest unity packages located [HERE](https://github.com/skyfreezer/Skys_Tools/releases/)<br>
 
